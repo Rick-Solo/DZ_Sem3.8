@@ -8,6 +8,47 @@
 // 9 5 3 2
 // 8 4 4 2
 
+int[,] array = new int[3, 4];
+Console.WriteLine("Исходный массив" + "\n");
+
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        array[i, j] = new Random().Next(0, 10);
+        Console.Write(array[i, j] + "\t");
+
+    }
+    Console.WriteLine();
+}
+Console.WriteLine("\n" + "Упорядоченный массив");
+
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int k = 0; k < array.GetLength(1); k++)
+    {
+        for (int j = 0; j < array.GetLength(1) - 1; j++)
+        {
+            if (array[i, j] < array[i, j + 1])
+            {
+                int temp = array[i, j];
+                array[i, j] = array[i, j + 1];
+                array[i, j + 1] = temp;
+            }
+        }
+    }
+}
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        Console.Write(array[i, j] + "\t");
+
+    }
+    Console.WriteLine();
+}
+
+// -----------------------------------------------------------------
 // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 
 // Например, задан массив:
