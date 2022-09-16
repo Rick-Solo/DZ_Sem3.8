@@ -86,60 +86,105 @@
 // 18 20
 // 15 18
 
-Console.Write("Введите количество строк 1 матрицы: ");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов 1 матрицы: ");
-int n = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите количество строк 1 матрицы: ");
+// int m = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите количество столбцов 1 матрицы: ");
+// int n = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("\n" + "Первая матрица:");
+// Console.WriteLine("\n" + "Первая матрица:");
 
-int[,] matrix1 = new int[m, n];
-for (int i = 0; i < matrix1.GetLength(0); i++)
-{
-    for (int j = 0; j < matrix1.GetLength(1); j++)
-    {
-        matrix1[i, j] = new Random().Next(10);
-        Console.Write(matrix1[i,j] + "\t");
-    }
-    Console.WriteLine();
-}
+// int[,] matrix1 = new int[m, n];
+// for (int i = 0; i < matrix1.GetLength(0); i++)
+// {
+//     for (int j = 0; j < matrix1.GetLength(1); j++)
+//     {
+//         matrix1[i, j] = new Random().Next(10);
+//         Console.Write(matrix1[i,j] + "\t");
+//     }
+//     Console.WriteLine();
+// }
 
-Console.WriteLine("\n" + "Вторая матрица:");
+// Console.WriteLine("\n" + "Вторая матрица:");
 
-int[,] matrix2 = new int[n, m];
-for (int i = 0; i < matrix2.GetLength(0); i++)
-{
-    for (int j = 0; j < matrix2.GetLength(1); j++)
-    {
-        matrix2[i, j] = new Random().Next(10);
-        Console.Write(matrix2[i,j] + "\t");
-    }
-    Console.WriteLine();
-}
-Console.WriteLine("\n" + "Результат произведения матриц:");
-int[,] matrixOtvet = new int[matrix1.GetLength(0), matrix2.GetLength(1)];
+// int[,] matrix2 = new int[n, m];
+// for (int i = 0; i < matrix2.GetLength(0); i++)
+// {
+//     for (int j = 0; j < matrix2.GetLength(1); j++)
+//     {
+//         matrix2[i, j] = new Random().Next(10);
+//         Console.Write(matrix2[i,j] + "\t");
+//     }
+//     Console.WriteLine();
+// }
+// Console.WriteLine("\n" + "Результат произведения матриц:");
+// int[,] matrixOtvet = new int[matrix1.GetLength(0), matrix2.GetLength(1)];
 
-for (int i = 0; i < matrix1.GetLength(0); i++)
-{
-    for (int j = 0; j < matrix2.GetLength(1); j++)
-    {
-        for (int k = 0; k < matrix2.GetLength(0); k++)
-        {
-            matrixOtvet[i,j] += matrix1[i,k] * matrix2[k, j];
-        }
-        Console.Write(matrixOtvet[i,j] + "\t");
-    }
-    Console.WriteLine();
-}
+// for (int i = 0; i < matrix1.GetLength(0); i++)
+// {
+//     for (int j = 0; j < matrix2.GetLength(1); j++)
+//     {
+//         for (int k = 0; k < matrix2.GetLength(0); k++)
+//         {
+//             matrixOtvet[i,j] += matrix1[i,k] * matrix2[k, j];
+//         }
+//         Console.Write(matrixOtvet[i,j] + "\t");
+//     }
+//     Console.WriteLine();
+// }
 
 // ---------------------------------------------------------
-// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
+// Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
 // 66(0,0,0) 25(0,1,0)
 // 34(1,0,0) 41(1,1,0)
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
+Console.Write("Введите количество строк (x): ");
+int x = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов (y): ");
+int y = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество строк по оси Z: ");
+int z = Convert.ToInt32(Console.ReadLine());
+
+if (x * y * z > 90)
+{
+    Console.WriteLine("Невозможно заполнить массив без повторения чисел! Уменьшите размерность массива.");
+}
+else
+{
+    int[] arrayRandom = new int[90];
+    for (int i = 0; i < arrayRandom.Length - 1; i++)
+    {
+        arrayRandom[i] = 10 + i;
+    }
+    for (int i = 0; i < arrayRandom.Length; i++)
+    {
+        int j = new Random().Next(arrayRandom.Length);
+        int temp = arrayRandom[j];
+        arrayRandom[j] = arrayRandom[i];
+        arrayRandom[i] = temp;
+    }
+
+    int[,,] matrix3D = new int[x, y, z];
+    int count = 0;
+    for (int i = 0; i < matrix3D.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix3D.GetLength(1); j++)
+        {
+            for (int k = 0; k < matrix3D.GetLength(2); k++)
+            {
+                matrix3D[i, j, k] = arrayRandom[count];
+                Console.Write($"{matrix3D[i, j, k]}({i},{j},{k})" + "\t");
+                count += 1;
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+//--------------------------------------------------------------------------
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 // Например, на выходе получается вот такой массив:
 // 01 02 03 04
