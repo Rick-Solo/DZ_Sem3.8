@@ -141,48 +141,48 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-Console.Write("Введите количество строк (x): ");
-int x = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов (y): ");
-int y = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество строк по оси Z: ");
-int z = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите количество строк (x): ");
+// int x = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите количество столбцов (y): ");
+// int y = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите количество строк по оси Z: ");
+// int z = Convert.ToInt32(Console.ReadLine());
 
-if (x * y * z > 90)
-{
-    Console.WriteLine("Невозможно заполнить массив без повторения чисел! Уменьшите размерность массива.");
-}
-else
-{
-    int[] arrayRandom = new int[90];
-    for (int i = 0; i < arrayRandom.Length - 1; i++)
-    {
-        arrayRandom[i] = 10 + i;
-    }
-    for (int i = 0; i < arrayRandom.Length; i++)
-    {
-        int j = new Random().Next(arrayRandom.Length);
-        int temp = arrayRandom[j];
-        arrayRandom[j] = arrayRandom[i];
-        arrayRandom[i] = temp;
-    }
+// if (x * y * z > 90)
+// {
+//     Console.WriteLine("Невозможно заполнить массив без повторения чисел! Уменьшите размерность массива.");
+// }
+// else
+// {
+//     int[] arrayRandom = new int[90];
+//     for (int i = 0; i < arrayRandom.Length - 1; i++)
+//     {
+//         arrayRandom[i] = 10 + i;
+//     }
+//     for (int i = 0; i < arrayRandom.Length; i++)
+//     {
+//         int j = new Random().Next(arrayRandom.Length);
+//         int temp = arrayRandom[j];
+//         arrayRandom[j] = arrayRandom[i];
+//         arrayRandom[i] = temp;
+//     }
 
-    int[,,] matrix3D = new int[x, y, z];
-    int count = 0;
-    for (int i = 0; i < matrix3D.GetLength(0); i++)
-    {
-        for (int j = 0; j < matrix3D.GetLength(1); j++)
-        {
-            for (int k = 0; k < matrix3D.GetLength(2); k++)
-            {
-                matrix3D[i, j, k] = arrayRandom[count];
-                Console.Write($"{matrix3D[i, j, k]}({i},{j},{k})" + "\t");
-                count += 1;
-            }
-            Console.WriteLine();
-        }
-    }
-}
+//     int[,,] matrix3D = new int[x, y, z];
+//     int count = 0;
+//     for (int i = 0; i < matrix3D.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < matrix3D.GetLength(1); j++)
+//         {
+//             for (int k = 0; k < matrix3D.GetLength(2); k++)
+//             {
+//                 matrix3D[i, j, k] = arrayRandom[count];
+//                 Console.Write($"{matrix3D[i, j, k]}({i},{j},{k})" + "\t");
+//                 count += 1;
+//             }
+//             Console.WriteLine();
+//         }
+//     }
+// }
 
 //--------------------------------------------------------------------------
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -191,3 +191,49 @@ else
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+
+Console.Write("Введите количество строк: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов: ");
+int n = Convert.ToInt32(Console.ReadLine());
+int[,] array = new int[m, n];
+
+int iBegin = 0, iFinal = 0;     //Во время заполнения это будут индексы начальной и конечной сторон, т.е 
+int jBegin = 0, jFinal = 0;    // от какой и до какой стороны прямоугольника мы заполняем числами.
+
+int i = 0;
+int j = 0;
+
+for (int k = 1; k <= m * n; k++)
+{
+    array[i,j] =k;
+    if (i == iBegin && j < n - jFinal - 1) j++;
+    else
+    {
+        if (j == n - jFinal - 1 && i < m - iFinal - 1) i++;
+        else
+        {
+            if (i == m - iFinal - 1 && j > jBegin) j--;
+            else
+            {
+                i--;
+            }
+        }
+    }
+    if ((i == iBegin + 1) && (j == jBegin) && (jBegin != n - jFinal - 1))
+    {
+        iBegin++;
+        iFinal++;
+        jBegin++;
+        jFinal++;
+    }
+}
+
+for ( i = 0; i < array.GetLength(0); i++)
+{
+    for ( j = 0; j < array.GetLength(1); j++)
+    {
+        Console.Write(array[i,j] + "\t");
+    }
+    Console.WriteLine();
+}
